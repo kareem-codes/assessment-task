@@ -5,8 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -14,13 +13,13 @@ datasource db {
 }
 
 model PermitApplication {
-  id                 Int      @id @default(autoincrement())
+  id                 Int               @id @default(autoincrement())
   applicant_name     String
-  applicant_email    String
+  applicant_email    String            @unique
   permit_type        String
   application_status ApplicationStatus @default(Pending)
-  submitted_at         DateTime @default(now())
-  updated_at         DateTime @updatedAt
+  submitted_at       DateTime          @default(now())
+  updated_at         DateTime          @updatedAt
 }
 
 enum ApplicationStatus {

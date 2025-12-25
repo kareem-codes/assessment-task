@@ -13,3 +13,6 @@ CREATE TABLE "PermitApplication" (
 
     CONSTRAINT "PermitApplication_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "PermitApplication_applicant_email_key" ON "PermitApplication"("applicant_email");
