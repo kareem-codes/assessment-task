@@ -54,7 +54,7 @@ export class PermitsService {
     async remove(id: number) {
         try {
             await this.prisma.permitApplication.delete({ where: { id } });
-			return { message: `Permit with ID ${id} has been deleted` };
+            return { message: `Permit with ID ${id} has been deleted` };
         } catch (error) {
             if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2025") {
                 throw new NotFoundException(`Permit with ID ${id} not found`);

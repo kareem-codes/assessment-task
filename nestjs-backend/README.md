@@ -1,98 +1,298 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# NestJS Permits Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A NestJS REST API for managing permit applications with PostgreSQL and Prisma ORM.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Prerequisites
 
-## Description
+- Node.js (v24 or higher)
+- npm or yarn
+- Docker and Docker Compose (for local PostgreSQL)
+- OR Prisma Cloud account (for cloud database)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Setup Instructions
 
-## Project setup
+### Option 1: Using Prisma Cloud Database
+
+#### 1. Install Dependencies
 
 ```bash
-$ npm install
+npm install
 ```
 
-## Compile and run the project
+#### 2. Set Up Prisma Cloud
+
+1. Visit [Prisma Cloud Console](https://console.prisma.io)
+2. Create a new project or use an existing one
+3. Create a PostgreSQL database
+4. Copy the connection string
+
+#### 3. Configure Environment Variables
+
+Create a `.env` file:
+```bash
+cp .env.example .env
+```
+
+Update the `DATABASE_URL` with your Prisma Cloud connection string:
+```env
+DATABASE_URL="postgresql://user:password@host:5432/database?schema=public&sslmode=require"
+PORT=3001
+```
+
+#### 4. Run Database Migrations
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npx prisma migrate deploy
 ```
 
-## Run tests
+#### 5. Start the Application
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run start:dev
 ```
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+### Option 2: Using Docker (Recommended for Local Development)
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+#### 1. Clone and Navigate
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+cd nestjs-backend
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+#### 2. Install Dependencies
 
-## Resources
+```bash
+npm install
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+#### 3. Configure Environment Variables
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```bash
+cp .env.example .env
+```
 
-## Support
+The default `.env` configuration:
+```env
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/permits_db?schema=public"
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+POSTGRES_DB=permits_db
+PORT=3001
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+#### 4. Start PostgreSQL with Docker
 
-## Stay in touch
+From the project root directory:
+```bash
+cd ..
+docker-compose up -d
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+This will start a PostgreSQL container on port 5432.
 
-## License
+#### 5. Run Database Migrations
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```bash
+cd nestjs-backend
+npx prisma migrate dev
+```
+
+#### 6. Start the Application
+
+```bash
+npm run start:dev
+```
+
+The API will be available at `http://localhost:3001`
+
+---
+
+## API Endpoints
+
+### Create Permit Application
+```http
+POST /permits
+Content-Type: application/json
+
+{
+  "applicant_name": "John Doe",
+  "applicant_email": "john@example.com",
+  "permit_type": "Building Permit"
+}
+```
+
+### Get All Permits
+```http
+GET /permits
+```
+
+### Get Single Permit
+```http
+GET /permits/:id
+```
+
+### Update Permit
+```http
+PATCH /permits/:id
+Content-Type: application/json
+
+{
+  "application_status": "Approved"
+}
+```
+
+### Delete Permit
+```http
+DELETE /permits/:id
+```
+
+---
+
+## Database Schema
+
+The application uses a single `PermitApplication` model:
+
+- `id` - Auto-incrementing integer (Primary Key)
+- `applicant_name` - String (Required)
+- `applicant_email` - String (Required, Unique)
+- `permit_type` - String (Required)
+- `application_status` - Enum: `Pending` | `Approved` | `Rejected` (Default: Pending)
+- `submitted_at` - DateTime (Auto-generated)
+- `updated_at` - DateTime (Auto-updated)
+
+---
+
+## Available Scripts
+
+- `npm run start` - Start the application
+- `npm run start:dev` - Start in watch mode (development)
+- `npm run start:prod` - Start in production mode
+- `npm run build` - Build the application
+- `npm run test` - Run unit tests
+- `npm run test:e2e` - Run end-to-end tests
+- `npm run lint` - Lint and fix code
+
+---
+
+## Prisma Commands
+
+### Generate Prisma Client
+```bash
+npx prisma generate
+```
+
+### Create New Migration
+```bash
+npx prisma migrate dev --name migration_name
+```
+
+### Apply Migrations (Production)
+```bash
+npx prisma migrate deploy
+```
+
+### Open Prisma Studio (Database GUI)
+```bash
+npx prisma studio
+```
+
+### Reset Database (Development Only)
+```bash
+npx prisma migrate reset
+```
+
+---
+
+## Docker Commands
+
+### Start PostgreSQL
+```bash
+docker-compose up -d
+```
+
+### Stop PostgreSQL
+```bash
+docker-compose down
+```
+
+### View Logs
+```bash
+docker-compose logs -f postgres
+```
+
+### Reset Database Volume
+```bash
+docker-compose down -v
+docker-compose up -d
+```
+
+---
+
+## Production Deployment
+
+### 1. Build the Application
+```bash
+npm run build
+```
+
+### 2. Set Production Environment Variables
+```env
+NODE_ENV=production
+DATABASE_URL="your_production_database_url"
+PORT=3001
+```
+
+### 3. Run Migrations
+```bash
+npx prisma migrate deploy
+```
+
+### 4. Start the Application
+```bash
+npm run start:prod
+```
+
+---
+
+## Troubleshooting
+
+### Database Connection Issues
+
+**Error: Can't reach database server**
+- Ensure Docker container is running: `docker ps`
+- Check if PostgreSQL is listening on port 5432: `netstat -an | grep 5432`
+- Verify DATABASE_URL in `.env` matches your configuration
+
+**Error: P2025 - Record not found**
+- This occurs when trying to update/delete a non-existent permit
+- The API will return a 404 status with a descriptive message
+
+### Migration Issues
+
+**Error: Migration already applied**
+```bash
+npx prisma migrate resolve --applied migration_name
+```
+
+**Database out of sync**
+```bash
+npx prisma migrate dev
+```
+
+### Port Already in Use
+
+If port 3001 or 5432 is already in use:
+- Change the PORT in `.env` for the application
+- Change the port mapping in `docker-compose.yml` for PostgreSQL
+
+---
+
+## Development Notes
+
+- The application uses class-validator for DTO validation
+- Global ValidationPipe is configured for automatic request validation
+- ParseIntPipe ensures type-safe route parameters
+- Prisma handles database operations with type safety
+- Error handling follows NestJS best practices with proper HTTP exceptions
