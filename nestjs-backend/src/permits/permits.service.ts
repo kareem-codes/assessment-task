@@ -1,6 +1,7 @@
 import { HttpException, Injectable, NotFoundException } from "@nestjs/common";
 import { CreatePermitDto } from "./dto/create-permit.dto";
 import { UpdatePermitDto } from "./dto/update-permit.dto";
+import { PaginationDto } from "./dto/pagination.dto";
 import { PrismaService } from "../prisma.service";
 import { Prisma } from "@prisma/client";
 
@@ -20,16 +21,44 @@ export class PermitsService {
         });
     }
 
-    async findAll(page: number = 1, limit: number = 10) {
+    async findAll(paginationDto: PaginationDto) {
+        const { page = 1, limit = 10, search, status, dateFrom, dateTo } = paginationDto;
         const skip = (page - 1) * limit;
+
+        const where: Prisma.PermitApplicationWhereInput = {};
+
+        if (search) {
+            where.OR = [
+                { applicant_name: { contains: search, mode: 'insensitive' } },
+                { applicant_email: { contains: search, mode: 'insensitive' } },
+                { permit_type: { contains: search, mode: 'insensitive' } },
+            ];
+        }
+
+        if (status) {
+            where.application_status = status;
+        }
+
+        if (dateFrom || dateTo) {
+            where.submitted_at = {};
+            if (dateFrom) {
+                where.submitted_at.gte = new Date(dateFrom);
+            }
+            if (dateTo) {
+                const endDate = new Date(dateTo);
+                endDate.setHours(23, 59, 59, 999);
+                where.submitted_at.lte = endDate;
+            }
+        }
 
         const [data, total] = await Promise.all([
             this.prisma.permitApplication.findMany({
+                where,
                 skip,
                 take: limit,
                 orderBy: { submitted_at: "desc" },
             }),
-            this.prisma.permitApplication.count(),
+            this.prisma.permitApplication.count({ where }),
         ]);
 
         const totalPages = Math.ceil(total / limit);

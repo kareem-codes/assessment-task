@@ -34,7 +34,7 @@
           required
         />
 
-        <div class="nds-flex" style="gap: var(--nds-spacing-md); margin-block-start: var(--nds-spacing-lg);">
+        <div class="nds-flex nds-flex-gap-md nds-mt-lg">
           <NdsButton type="submit" variant="primary" :loading="submitting">
             {{ $t('apply.submit') }}
           </NdsButton>

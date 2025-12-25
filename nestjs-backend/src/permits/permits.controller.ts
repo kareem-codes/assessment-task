@@ -15,7 +15,7 @@ export class PermitsController {
 
     @Get()
     findAll(@Query() paginationDto: PaginationDto) {
-        return this.permitsService.findAll(paginationDto.page, paginationDto.limit);
+        return this.permitsService.findAll(paginationDto);
     }
 
     @Get(":id")

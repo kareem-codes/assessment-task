@@ -1,5 +1,6 @@
 <template>
-  <span :class="badgeClasses">
+  <span :class="badgeClasses" class="nds-status-badge">
+    <i :class="statusIcon" class="status-icon"></i>
     <slot />
   </span>
 </template>
@@ -10,6 +11,15 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+
+const statusIcon = computed(() => {
+  const iconMap = {
+    'Pending': 'fa fa-clock',
+    'Approved': 'fa fa-check-circle',
+    'Rejected': 'fa fa-times-circle'
+  };
+  return iconMap[props.status];
+});
 
 const badgeClasses = computed(() => {
   const statusMap = {
@@ -24,3 +34,15 @@ const badgeClasses = computed(() => {
   ];
 });
 </script>
+
+<style scoped>
+.nds-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.status-icon {
+  font-size: 0.875em;
+}
+</style>

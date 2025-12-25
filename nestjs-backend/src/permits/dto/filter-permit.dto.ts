@@ -1,4 +1,4 @@
-import { IsOptional, IsInt, Min, Max, IsString, IsEnum, IsDateString } from 'class-validator';
+import { IsOptional, IsString, IsEnum, IsDateString } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export enum ApplicationStatus {
@@ -7,20 +7,7 @@ export enum ApplicationStatus {
   Rejected = 'Rejected',
 }
 
-export class PaginationDto {
-  @IsOptional()
-  @Type(() => Number)
-  @IsInt()
-  @Min(1)
-  page?: number = 1;
-
-  @IsOptional()
-  @Type(() => Number)
-  @IsInt()
-  @Min(1)
-  @Max(100)
-  limit?: number = 10;
-
+export class FilterPermitDto {
   @IsOptional()
   @IsString()
   search?: string;
@@ -37,4 +24,3 @@ export class PaginationDto {
   @IsDateString()
   dateTo?: string;
 }
-

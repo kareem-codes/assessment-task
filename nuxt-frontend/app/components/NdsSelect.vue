@@ -2,7 +2,7 @@
   <div class="nds-form-group">
     <label v-if="label" :for="selectId" class="nds-label">
       {{ label }}
-      <span v-if="required" style="color: var(--nds-color-danger)">*</span>
+      <span v-if="required" class="nds-required">*</span>
     </label>
     <select
       :id="selectId"

@@ -37,10 +37,16 @@
     "deleteSelected": "Delete Selected",
     "page": "Page",
     "of": "of",
-    "search": "Search...",
+    "search": "Search by name, email, or permit type...",
     "noResults": "No results found",
     "previous": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "first": "First",
+    "last": "Last",
+    "allStatuses": "All Statuses",
+    "dateFrom": "From Date",
+    "dateTo": "To Date",
+    "clearFilters": "Clear Filters"
   },
   "permit": {
     "title": "Permit Details",

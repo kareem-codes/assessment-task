@@ -10,7 +10,7 @@
       <div class="nds-flex nds-flex-between nds-mb-lg">
         <h1>{{ isEditing ? $t('permit.edit') : $t('permit.title') }}</h1>
         <div class="nds-flex" style="gap: var(--nds-spacing-sm);">
-          <NuxtLink to="/list">
+          <NuxtLink @click="cancelEdit">
             <NdsButton variant="outline">{{ $t('permit.back') }}</NdsButton>
           </NuxtLink>
           <NdsButton 
@@ -116,7 +116,7 @@ const permitId = route.params.id;
 
 const { data: permit, pending, error, refresh } = await useFetch<PermitApplication>(`/api/permits/${permitId}`);
 
-const isEditing = ref(false);
+const isEditing = ref(route.query.edit === 'true');
 const submitting = ref(false);
 const successMessage = ref('');
 const errorMessage = ref('');
@@ -178,38 +178,3 @@ const cancelEdit = () => {
   }
 };
 </script>
-
-<style scoped>
-.permit-details {
-  display: flex;
-  flex-direction: column;
-  gap: var(--nds-spacing-lg);
-}
-
-.detail-row {
-  display: flex;
-  flex-direction: column;
-  gap: var(--nds-spacing-xs);
-  padding-block-end: var(--nds-spacing-md);
-  border-block-end: 1px solid var(--nds-color-border);
-}
-
-.detail-row:last-child {
-  border-block-end: none;
-}
-
-.detail-row strong {
-  color: var(--nds-color-text-secondary);
-  font-size: var(--nds-font-size-sm);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-@media (min-width: 768px) {
-  .detail-row {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-</style>
