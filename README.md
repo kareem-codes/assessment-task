@@ -41,7 +41,7 @@ For a rapid setup, follow these steps:
 
 ```bash
 # 1. Clone the repository
-git clone <repository-url>
+git clone https://github.com/kareem-codes/assessment-task
 cd assessment-task
 
 # 2. Start the database
