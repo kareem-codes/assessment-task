@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from "@nestjs/common";
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Query } from "@nestjs/common";
 import { PermitsService } from "./permits.service";
 import { CreatePermitDto } from "./dto/create-permit.dto";
 import { UpdatePermitDto } from "./dto/update-permit.dto";
+import { PaginationDto } from "./dto/pagination.dto";
 
 @Controller("permits")
 export class PermitsController {
@@ -13,8 +14,8 @@ export class PermitsController {
     }
 
     @Get()
-    findAll() {
-        return this.permitsService.findAll();
+    findAll(@Query() paginationDto: PaginationDto) {
+        return this.permitsService.findAll(paginationDto.page, paginationDto.limit);
     }
 
     @Get(":id")

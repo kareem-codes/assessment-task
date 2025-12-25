@@ -20,10 +20,31 @@ export class PermitsService {
         });
     }
 
-    async findAll() {
-        return this.prisma.permitApplication.findMany({
-            orderBy: { submitted_at: "desc" },
-        });
+    async findAll(page: number = 1, limit: number = 10) {
+        const skip = (page - 1) * limit;
+
+        const [data, total] = await Promise.all([
+            this.prisma.permitApplication.findMany({
+                skip,
+                take: limit,
+                orderBy: { submitted_at: "desc" },
+            }),
+            this.prisma.permitApplication.count(),
+        ]);
+
+        const totalPages = Math.ceil(total / limit);
+
+        return {
+            data,
+            meta: {
+                total,
+                page,
+                limit,
+                totalPages,
+                hasNextPage: page < totalPages,
+                hasPreviousPage: page > 1,
+            },
+        };
     }
 
     async findOne(id: number) {
