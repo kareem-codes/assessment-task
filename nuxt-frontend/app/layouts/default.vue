@@ -27,7 +27,7 @@
 
         <main class="main">
           <div class="container">
-            <slot />
+            <NuxtPage />
           </div>
         </main>
 

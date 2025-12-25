@@ -38,7 +38,9 @@
     "page": "Page",
     "of": "of",
     "search": "Search...",
-    "noResults": "No results found"
+    "noResults": "No results found",
+    "previous": "Previous",
+    "next": "Next"
   },
   "permit": {
     "title": "Permit Details",
@@ -65,6 +67,7 @@
     "error": "An error occurred",
     "success": "Operation completed successfully",
     "confirm": "Confirm",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "total": "Total"
   }
 }

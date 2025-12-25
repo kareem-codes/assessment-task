@@ -1,5 +1,4 @@
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
   future: {
@@ -27,7 +26,6 @@ export default defineNuxtConfig({
     ],
     defaultLocale: 'ar',
     strategy: 'no_prefix',
-    // lazy: true,
     langDir: 'locales',
     detectBrowserLanguage: {
       useCookie: true,
