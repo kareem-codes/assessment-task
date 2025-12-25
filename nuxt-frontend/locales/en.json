@@ -1,0 +1,70 @@
+{
+  "nav": {
+    "portal": "Permits Portal",
+    "home": "Home",
+    "apply": "Apply",
+    "list": "Manage Permits"
+  },
+  "footer": {
+    "copyright": "© 2025 Permit Request Service Portal. All rights reserved."
+  },
+  "home": {
+    "title": "Permits",
+    "noPermits": "No permits found",
+    "loading": "Loading..."
+  },
+  "apply": {
+    "title": "Submit New Permit Application",
+    "applicantName": "Applicant Name",
+    "applicantEmail": "Email Address",
+    "permitType": "Permit Type",
+    "submit": "Submit Application",
+    "success": "Application submitted successfully",
+    "error": "An error occurred while submitting the application"
+  },
+  "list": {
+    "title": "Manage Permits",
+    "id": "ID",
+    "applicantName": "Applicant Name",
+    "applicantEmail": "Email",
+    "permitType": "Permit Type",
+    "status": "Status",
+    "submittedAt": "Submitted At",
+    "actions": "Actions",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteSelected": "Delete Selected",
+    "page": "Page",
+    "of": "of",
+    "search": "Search...",
+    "noResults": "No results found"
+  },
+  "permit": {
+    "title": "Permit Details",
+    "edit": "Edit Permit",
+    "applicantName": "Applicant Name",
+    "applicantEmail": "Email Address",
+    "permitType": "Permit Type",
+    "status": "Status",
+    "submittedAt": "Submitted At",
+    "updatedAt": "Updated At",
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "success": "Permit updated successfully",
+    "error": "An error occurred while updating"
+  },
+  "status": {
+    "Pending": "Pending",
+    "Approved": "Approved",
+    "Rejected": "Rejected"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Operation completed successfully",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
+  }
+}
